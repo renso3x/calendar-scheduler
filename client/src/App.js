@@ -1,32 +1,30 @@
-import React, { Component } from 'react';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Launches from './components/Launches';
-import Launch from './components/Launch';
-import './App.css';
-import logo from './logo.png';
+import React, { Component } from "react";
+import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const client = new ApolloClient({
-  uri: '/graphql'
-});
+import "react-toastify/dist/ReactToastify.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import store from "./config/configStore";
+import ProtectedRoute from "./routes/protectedRoute";
+import routes from "./routes";
 
 class App extends Component {
   render() {
     return (
-      <ApolloProvider client={client}>
+      <Provider store={store}>
+        <ToastContainer />
         <Router>
-          <div className="container">
-            <img
-              src={logo}
-              alt="SpaceX"
-              style={{ width: 300, display: 'block', margin: 'auto' }}
-            />
-            <Route exact path="/" component={Launches} />
-            <Route exact path="/launch/:flight_number" component={Launch} />
-          </div>
+          <Switch>
+            {routes.map(route => {
+              const RenderedRoute = route.protected ? ProtectedRoute : Route;
+              return <RenderedRoute key={route.path} {...route} />;
+            })}
+            <Route component={() => <h6>Not found</h6>} />
+          </Switch>
         </Router>
-      </ApolloProvider>
+      </Provider>
     );
   }
 }

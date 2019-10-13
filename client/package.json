@@ -3,16 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "apollo-boost": "^0.1.20",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "graphql": "^14.0.2",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
-    "react": "^16.6.1",
-    "react-apollo": "^2.2.4",
-    "react-dom": "^16.6.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.10.2",
+    "react-big-calendar": "^0.22.1",
+    "react-dom": "^16.10.2",
     "react-moment": "^0.8.3",
+    "react-redux": "^7.1.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "react-toastify": "^5.4.0",
+    "reactstrap": "^8.0.1",
+    "redux": "^4.0.4",
+    "redux-saga": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,5 +36,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:4000"
 }

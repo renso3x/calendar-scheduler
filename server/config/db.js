@@ -11,7 +11,7 @@ const Conn = new Sequelize("scheduler", "root", "password", {
 
 const Schedule = Conn.define("schedule", {
   start: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
   duration: {
@@ -50,15 +50,28 @@ const User = Conn.define("user", {
 User.hasMany(Schedule);
 Schedule.belongsTo(User);
 
-Conn.sync({ force: true }).then(() => {
-  //seeder
-  // _.times(10, async () => {
-  //   const hashedPassword = await bcrypt.hash("test", 10);
-  //   return User.create({
-  //     firstName: Faker.name.firstName(),
-  //     lastName: Faker.name.lastName(),
-  //     email: Faker.internet.email(),
-  //     password: hashedPassword
+Conn.sync({ force: true }).then(async () => {
+  // const event = [
+  //   { start: 0, duration: 15, title: "Excercise" },
+  //   { start: 25, duration: 30, title: "Travel to work" },
+  //   { start: 30, duration: 30, title: "Plan day" },
+  //   { start: 60, duration: 15, title: "Review yesterday's commits" },
+  //   { start: 100, duration: 15, title: "Code review" },
+  //   { start: 180, duration: 90, title: "Have lunch with John" },
+  //   { start: 360, duration: 30, title: "Have lunch with John" },
+  //   { start: 370, duration: 45, title: "Have lunch with John" },
+  //   { start: 405, duration: 30, title: "Have lunch with John" }
+  // ];
+  // //seeder
+  // const hashedPassword = await bcrypt.hash("password", 10);
+  // return User.create({
+  //   firstName: Faker.name.firstName(),
+  //   lastName: Faker.name.lastName(),
+  //   email: "admin@admin.com",
+  //   password: hashedPassword
+  // }).then(user => {
+  //   _.forEach(event, async evt => {
+  //     await user.createSchedule(evt);
   //   });
   // });
 });

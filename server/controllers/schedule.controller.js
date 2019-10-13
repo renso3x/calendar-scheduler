@@ -1,5 +1,5 @@
 const db = require("../config/db");
-const { checkSchedule } = require("../utils/schedule");
+const { setSchedulerFormat } = require("../utils/schedule");
 
 module.exports = {
   getSchedules: async (req, res, next) => {
@@ -22,7 +22,11 @@ module.exports = {
       if (!req.isAuth) {
         throw new Error("Not Authenticated");
       }
-      const isValidSched = checkSchedule(req.body.start, req.body.duration);
+      const isValidSched = setSchedulerFormat(
+        req.body.start,
+        req.body.duration
+      );
+
       if (!isValidSched) {
         throw new Error(`Please create in between 8AM - 5PM`);
       }
@@ -44,7 +48,11 @@ module.exports = {
         throw new Error("Not Authenticated");
       }
 
-      const isValidSched = checkSchedule(req.body.start, req.body.duration);
+      const isValidSched = setSchedulerFormat(
+        req.body.start,
+        req.body.duration
+      );
+
       if (!isValidSched) {
         throw new Error(`Please create in between 8AM - 5PM`);
       }

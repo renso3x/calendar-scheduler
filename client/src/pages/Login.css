@@ -1,0 +1,12 @@
+.form-login {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.btn-primary {
+  background: #007bff;
+}
+
+.btn-secondary {
+  background: #dc3545;
+}
