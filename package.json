@@ -1,0 +1,32 @@
+{
+  "name": "calendar_scheduler",
+  "version": "1.0.0",
+  "description": "App that create a schedule in a calendar.",
+  "main": "./server/",
+  "scripts": {
+    "start": "node ./server/",
+    "server": "nodemon ./server/",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "author": "Romeo Enso",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcrypt": "^3.0.6",
+    "concurrently": "^4.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "faker": "^4.1.0",
+    "graphql": "^14.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mysql2": "^1.7.0",
+    "sequelize": "^5.19.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.6"
+  }
+}
