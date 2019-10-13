@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { getCurrentUser, register, authenticate } from "../services/auth";
+import { getCurrentUser, register } from "../services/auth";
 import { Redirect } from "react-router-dom";
 
 import "./Login.css";

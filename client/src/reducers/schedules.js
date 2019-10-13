@@ -33,8 +33,6 @@ export default function scheduleReducer(state = initialState.schedule, action) {
       return {
         ...state,
         records: state.records.map(record => {
-          console.log(action.payload);
-
           if (record.id === action.payload.id) {
             return action.payload;
           }

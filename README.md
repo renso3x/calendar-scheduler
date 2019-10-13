@@ -1,34 +1,28 @@
 # Calendar Scheduler Stats
 
+## App Info
+
 > React, Redux Saga, Express, MySQL app that uses the Calendar Sceduler API to display calendar
 
 ## Quick Start
 
 ```bash
 # Install dependencies (server & client)
-npm install
-cd client && npm install
+yarn install
+cd client && yarn install
 
-# Run server & client (:3000 & :5000)
-npm run dev
-
-# Server only (:5000)
-npm run server
-
-# Client only (:3000)
-npm run client
-
-# Build for production (Builds into server ./public)
-cd client && npm run build
+# Run server & client (:3000 & :4000)
+yarn run dev
 
 ```
 
-## App Info
+- Seed sample events
+- Created admin credentials
+- `Email: admin@admin.com`, `password: password`
 
 ### Author
 
 Romeo Enso
-[Refluens](https://www.linkedin.com/in/romeoenso584/)
 
 ### Version
 

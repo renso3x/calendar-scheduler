@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import {
   Modal,
@@ -13,12 +13,16 @@ import {
 
 import "./Form.css";
 
-const Form = ({ modal, toggle, onSubmit, status, onUpdate }) => {
+const Form = ({ modal, toggle, onSubmit, status, onUpdate, record }) => {
   const [state, setState] = useState({
     start: "",
     duration: "15",
     title: ""
   });
+
+  useEffect(() => {
+    setState(record);
+  }, [record]);
 
   const handleChangeText = evt => {
     const value = evt.target.value;
@@ -44,17 +48,13 @@ const Form = ({ modal, toggle, onSubmit, status, onUpdate }) => {
             type="text"
             name="title"
             placeholder="Title"
+            value={state.title}
             onChange={handleChangeText}
           />
         </FormGroup>
         <FormGroup>
           <Label for="exampleTime">Start Time</Label>
-          <Input
-            type="time"
-            name="start"
-            value={state.start}
-            onChange={handleChangeText}
-          />
+          <Input type="time" name="start" onChange={handleChangeText} />
         </FormGroup>
         <FormGroup>
           <Label for="exampleTime">Duration</Label>

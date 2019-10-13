@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import moment from "moment";
+import React, { useState } from "react";
 import { Container } from "reactstrap";
 import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
 import { connect } from "react-redux";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
@@ -30,17 +30,16 @@ const Scheduler = ({
   createSchedule,
   updateSchedule
 }) => {
-  const [events, setEvents] = useState([]);
   const [modal, setModal] = useState(false);
 
   const [values, setValues] = useState({
     status: "",
-    record: {}
+    record: {
+      start: "",
+      duration: "15",
+      title: ""
+    }
   });
-
-  useEffect(() => {
-    setEvents(schedules);
-  }, [schedules]);
 
   const toggle = () => setModal(!modal);
 
@@ -72,6 +71,7 @@ const Scheduler = ({
   };
 
   const handleEditSchedule = sched => {
+    console.log(sched);
     updateSchedule({ id: values.record.id, ...sched });
     toggle();
     reset();
@@ -91,7 +91,7 @@ const Scheduler = ({
           Create a Schedule
         </button>
         <Calendar
-          events={events}
+          events={schedules}
           views={["day"]}
           defaultView={"day"}
           step={5}
@@ -110,6 +110,7 @@ const Scheduler = ({
         onSubmit={addSchedule}
         status={values.status}
         onUpdate={handleEditSchedule}
+        record={values.record}
       />
     </Container>
   );
