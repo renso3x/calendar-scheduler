@@ -1,14 +1,14 @@
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res, next) => {
-  const authHeader = req.get("Authorization");
+  const authHeader = req.get('Authorization');
 
   if (!authHeader) {
     req.isAuth = false;
     return next();
   }
 
-  const token = authHeader.split(" ")[1]; // Authentication: Bearer [TOKEN]
+  const token = authHeader.split(' ')[1]; // Authentication: Bearer [TOKEN]
 
   if (!token) {
     req.isAuth = false;
@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
   let decodedToken;
 
   try {
-    decodedToken = jwt.verify(token, "thisismysuperlongsscret");
+    decodedToken = jwt.verify(token, 'thisismysuperlongsscret');
   } catch (err) {
     req.isAuth = false;
     return next();

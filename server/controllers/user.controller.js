@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
-const db = require("../config/db");
+const bcrypt = require('bcrypt');
+const db = require('../config/db');
 
 module.exports = {
   createUser: async (req, res, next) => {
@@ -11,7 +11,7 @@ module.exports = {
       });
 
       if (exisitingUser) {
-        throw new Error("User exists already");
+        throw new Error('User exists already');
       }
 
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -25,7 +25,7 @@ module.exports = {
 
       return res
         .status(200)
-        .send({ success: true, message: "Successfully created a user." });
+        .send({ success: true, message: 'Successfully created a user.' });
     } catch (e) {
       next(e);
     }
