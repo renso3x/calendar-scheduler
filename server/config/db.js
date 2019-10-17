@@ -5,21 +5,16 @@ const bcrypt = require('bcrypt');
 
 const { newTimeParser } = require('../utils/schedule');
 
-const DATABASE = {
-  database: process.env.DATABASE || 'scheduler',
-  username: process.env.DB_USERNAME || 'root',
-  password: process.env.DB_PASSWORD || 'password'
-};
+let Conn;
 
-const Conn = new Sequelize(
-  DATABASE.database,
-  DATABASE.username,
-  DATABASE.password,
-  {
+if (process.env) {
+  Conn = new Sequelize(process.env.DATABASE);
+} else {
+  Conn = new Sequelize('scheduler', 'root', 'passwor', {
     host: 'localhost',
     dialect: 'mysql'
-  }
-);
+  });
+}
 
 const Schedule = Conn.define('schedule', {
   start: {
