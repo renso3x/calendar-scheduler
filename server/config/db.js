@@ -7,10 +7,10 @@ const { newTimeParser } = require('../utils/schedule');
 
 let Conn;
 
-if (process.env) {
+if (process.env.DATABASE) {
   Conn = new Sequelize(process.env.DATABASE);
 } else {
-  Conn = new Sequelize('scheduler', 'root', 'passwor', {
+  Conn = new Sequelize('scheduler', 'root', 'password', {
     host: 'localhost',
     dialect: 'mysql'
   });
