@@ -1,34 +1,30 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Button,
-  FormGroup,
-  Input,
-  Label
-} from "reactstrap";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
-import "./Form.css";
+import useStyles from './styles/form';
 
 const Form = ({ modal, toggle, onSubmit, status, onUpdate, record }) => {
+  const classes = useStyles();
   const [state, setState] = useState({
-    start: "",
-    duration: "15",
-    title: ""
+    start: '',
+    duration: '15',
+    title: ''
   });
 
   useEffect(() => {
     setState(record);
   }, [record]);
 
-  const handleChangeText = evt => {
-    const value = evt.target.value;
+  const handleChangeText = name => evt => {
     setState({
       ...state,
-      [evt.target.name]: value
+      [name]: evt.target.value
     });
   };
 
@@ -37,49 +33,59 @@ const Form = ({ modal, toggle, onSubmit, status, onUpdate, record }) => {
   };
 
   return (
-    <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle} className="modal-title">
-        Schedule Details
-      </ModalHeader>
-      <ModalBody>
-        <FormGroup>
-          <Label for="exampleTime">Title</Label>
-          <Input
-            type="text"
-            name="title"
-            placeholder="Title"
-            value={state.title}
-            onChange={handleChangeText}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleTime">Start Time</Label>
-          <Input type="time" name="start" onChange={handleChangeText} />
-        </FormGroup>
-        <FormGroup>
-          <Label for="exampleTime">Duration</Label>
-          <Input
-            type="select"
-            name="duration"
-            value={state.duration}
-            onChange={handleChangeText}
-          >
-            <option>15</option>
-            <option>30</option>
-            <option>45</option>
-            <option>60</option>
-          </Input>
-        </FormGroup>
-      </ModalBody>
-      <ModalFooter>
+    <Dialog open={modal} maxWidth="md">
+      <DialogTitle>Schedule Details</DialogTitle>
+      <DialogContent>
+        <TextField
+          margin="normal"
+          className={classes.textField}
+          type="text"
+          name="title"
+          placeholder="Title"
+          value={state.title}
+          onChange={handleChangeText('title')}
+          fullWidth
+        />
+        <TextField
+          margin="normal"
+          className={classes.textField}
+          fullWidth
+          type="time"
+          name="start"
+          onChange={handleChangeText('start')}
+        />
+        <TextField
+          id="standard-select-currency-native"
+          select
+          label="Native select"
+          className={classes.textField}
+          value={state.duration}
+          onChange={handleChangeText('duration')}
+          SelectProps={{
+            native: true,
+            MenuProps: {
+              className: classes.menu
+            }
+          }}
+          helperText="Please select the duration"
+          margin="normal"
+          fullWidth
+        >
+          <option value="15">15</option>
+          <option value="30">30</option>
+          <option value="45">45</option>
+          <option value="60">60</option>
+        </TextField>
+      </DialogContent>
+      <DialogActions>
         <Button color="primary" onClick={handleSubmit}>
-          {!status ? "Submit" : "Update"}
-        </Button>{" "}
+          {!status ? 'Submit' : 'Update'}
+        </Button>{' '}
         <Button color="secondary" onClick={toggle}>
           Cancel
         </Button>
-      </ModalFooter>
-    </Modal>
+      </DialogActions>
+    </Dialog>
   );
 };
 

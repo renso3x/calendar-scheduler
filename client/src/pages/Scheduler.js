@@ -1,28 +1,22 @@
-import moment from "moment";
-import React, { useState } from "react";
-import { Container } from "reactstrap";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import { connect } from "react-redux";
-import "react-big-calendar/lib/css/react-big-calendar.css";
+import moment from 'moment';
+import React, { useState } from 'react';
+import { Calendar, momentLocalizer } from 'react-big-calendar';
+import { connect } from 'react-redux';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
-import "./Scheduler.css";
-import Navigation from "../components/Nav";
-import { formatSchedule } from "../utils/schedule";
+import { formatSchedule } from '../utils/schedule';
 import {
   createSchedule,
   deleteSchedule,
   updateSchedule
-} from "../reducers/schedules";
-import Form from "../components/Form";
+} from '../reducers/schedules';
+import Form from '../components/Form';
+import Layout from '../components/Layout';
+import useStyles from './styles/schedule';
 
 const localizer = momentLocalizer(moment);
-
-const ColoredDateCellWrapper = ({ children }) =>
-  React.cloneElement(React.Children.only(children), {
-    style: {
-      backgroundColor: "lightblue"
-    }
-  });
 
 const Scheduler = ({
   schedules,
@@ -30,32 +24,32 @@ const Scheduler = ({
   createSchedule,
   updateSchedule
 }) => {
+  const classes = useStyles();
   const [modal, setModal] = useState(false);
 
   const [values, setValues] = useState({
-    status: "",
+    status: '',
     record: {
-      start: "",
-      duration: "15",
-      title: ""
+      start: '',
+      duration: '15',
+      title: ''
     }
   });
 
   const toggle = () => setModal(!modal);
 
-  const reset = () => setValues({ ...values, status: "" });
+  const reset = () => setValues({ ...values, status: '' });
 
   const handleSelected = record => {
     const r = window.confirm(
-      "Do you want to delete this schedule? Press OK, cancel for editting"
+      'Do you want to delete this schedule? Press OK, cancel for editting'
     );
 
     if (r) {
       handleDelete(record);
       reset();
     } else {
-      setValues({ ...values, record, status: "edit" });
-
+      setValues({ ...values, record, status: 'edit' });
       toggle();
     }
   };
@@ -71,39 +65,32 @@ const Scheduler = ({
   };
 
   const handleEditSchedule = sched => {
-    console.log(sched);
     updateSchedule({ id: values.record.id, ...sched });
     toggle();
     reset();
   };
 
   return (
-    <Container>
-      <Navigation />
+    <Layout>
       <div className="calendar">
-        <button
-          type="button"
-          className="btn btn-primary button"
-          data-toggle="modal"
-          data-target="#form"
-          onClick={toggle}
-        >
-          Create a Schedule
-        </button>
         <Calendar
           events={schedules}
-          views={["day"]}
-          defaultView={"day"}
+          views={['day']}
+          defaultView={'day'}
           step={5}
-          showMultiDayTimes
           defaultDate={new Date()}
-          components={{
-            timeSlotWrapper: ColoredDateCellWrapper
-          }}
           onSelectEvent={handleSelected}
           localizer={localizer}
         />
       </div>
+      <Fab
+        color="primary"
+        aria-label="add"
+        className={classes.fab}
+        onClick={toggle}
+      >
+        <AddIcon />
+      </Fab>
       <Form
         modal={modal}
         toggle={toggle}
@@ -112,7 +99,7 @@ const Scheduler = ({
         onUpdate={handleEditSchedule}
         record={values.record}
       />
-    </Container>
+    </Layout>
   );
 };
 
