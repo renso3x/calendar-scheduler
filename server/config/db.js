@@ -1,4 +1,3 @@
-const moment = require('moment');
 const _ = require('lodash');
 const Faker = require('faker');
 const Sequelize = require('sequelize');
@@ -6,10 +5,21 @@ const bcrypt = require('bcrypt');
 
 const { newTimeParser } = require('../utils/schedule');
 
-const Conn = new Sequelize('scheduler', 'root', 'password', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
+const DATABASE = {
+  database: process.env.DATABASE || 'scheduler',
+  username: process.env.DB_USERNAME || 'root',
+  password: process.env.DB_PASSWORD || 'password'
+};
+
+const Conn = new Sequelize(
+  DATABASE.database,
+  DATABASE.username,
+  DATABASE.password,
+  {
+    host: 'localhost',
+    dialect: 'mysql'
+  }
+);
 
 const Schedule = Conn.define('schedule', {
   start: {
@@ -65,7 +75,6 @@ Conn.sync({ force: true }).then(async () => {
     { start: 370, duration: 45, title: 'Have lunch with John' },
     { start: 405, duration: 30, title: 'Have lunch with John' }
   ];
-  // //seeder
   const hashedPassword = await bcrypt.hash('password', 10);
   return User.create({
     firstName: Faker.name.firstName(),
