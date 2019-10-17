@@ -1,0 +1,152 @@
+{
+  "all": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          { "id": 1, "start": 0, "duration": 15, "title": "Excercise" },
+          { "id": 2, "start": 25, "duration": 30, "title": "Travel to work" },
+          { "id": 3, "start": 30, "duration": 30, "title": "Plan day" }
+        ]
+      }
+    }
+  },
+  "noAuthenticated": {
+    "res": {
+      "statusCode": 500,
+      "headers": {
+        "content-type": "application/json"
+      }
+    },
+    "body": {
+      "status": "error",
+      "message": "Not Authenticated"
+    }
+  },
+  "add": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "start": 60,
+            "duration": 15,
+            "title": "Lunch Time",
+            "userId": 1
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 400,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "Please create in between 8AM - 5PM"
+      }
+    }
+  },
+  "update": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 4,
+            "start": 90,
+            "duration": 30,
+            "title": "Eat breafast",
+            "userId": 1
+          }
+        ]
+      }
+    },
+    "notFound": {
+      "res": {
+        "statusCode": 500,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "Schedule does not exist"
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That schedule does not exist."
+      }
+    }
+  },
+  "delete": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": {
+          "sucess": true,
+          "message": "You have successfully deleted."
+        }
+      }
+    },
+    "notFound": {
+      "res": {
+        "statusCode": 500,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "Sorry, unable to find scedule."
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "Sorry, unable to find scedule."
+      }
+    }
+  }
+}
