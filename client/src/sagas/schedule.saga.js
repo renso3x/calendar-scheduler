@@ -19,10 +19,7 @@ export function* watchfetchSchedules() {
 }
 
 function putSchedule(record) {
-  return http.put(
-    `${process.env.REACT_APP_API_URL}/schedule/${record.id}`,
-    record
-  );
+  return http.put(`/schedule/${record.id}`, record);
 }
 
 function* updateSchedule(action) {
@@ -38,7 +35,7 @@ function* updateSchedule(action) {
 }
 
 function addSchedule(data) {
-  return http.post(`${process.env.REACT_APP_API_URL}/schedule/`, data);
+  return http.post(`/schedule/`, data);
 }
 
 function* createSchedule(action) {
@@ -58,7 +55,7 @@ function* fetchSchedules() {
     if (!getCurrentUser()) {
       return null;
     }
-    const apiUrl = `${process.env.REACT_APP_API_URL}/schedule`;
+    const apiUrl = `/schedule`;
     const schedules = yield http.get(apiUrl);
 
     yield put({ type: FETCH_SCHEDULE, payload: schedules.data });
@@ -68,7 +65,7 @@ function* fetchSchedules() {
 }
 
 function deleteSchedule(record) {
-  return http.delete(`${process.env.REACT_APP_API_URL}/schedule/${record.id}`);
+  return http.delete(`/schedule/${record.id}`);
 }
 
 function* removeSchedule(action) {

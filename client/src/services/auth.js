@@ -1,7 +1,7 @@
-import jwtDecode from "jwt-decode";
-import httpRequest from "./http";
+import jwtDecode from 'jwt-decode';
+import httpRequest from './http';
 
-const tokenKey = "token";
+const tokenKey = 'token';
 
 export const setToken = token => {
   localStorage.setItem(tokenKey, token);
@@ -21,13 +21,13 @@ export const removeToken = () => {
 };
 
 export const authenticate = payload => {
-  const apiUrl = `${process.env.REACT_APP_API_URL}/auth/login`;
+  const apiUrl = `/auth/login`;
 
   return httpRequest.post(apiUrl, payload);
 };
 
 export const register = payload => {
-  const apiUrl = `${process.env.REACT_APP_API_URL}/user/register`;
+  const apiUrl = `/user/register`;
 
   return httpRequest.post(apiUrl, payload);
 };
