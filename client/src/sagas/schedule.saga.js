@@ -1,5 +1,5 @@
-import http from "../services/http";
-import { takeEvery, put, fork, call } from "redux-saga/effects";
+import http from '../services/http';
+import { takeEvery, put, fork, call } from 'redux-saga/effects';
 import {
   FETCH_SCHEDULE,
   DELETE_INIT,
@@ -8,7 +8,8 @@ import {
   CREATE_SUCCESS,
   UPDATE_INIT,
   UPDATE_SUCCESS
-} from "../reducers/schedules";
+} from '../reducers/schedules';
+import { getCurrentUser } from '../services/auth';
 
 export function* watchfetchSchedules() {
   yield fork(fetchSchedules);
@@ -54,6 +55,9 @@ function* createSchedule(action) {
 
 function* fetchSchedules() {
   try {
+    if (!getCurrentUser()) {
+      return null;
+    }
     const apiUrl = `${process.env.REACT_APP_API_URL}/schedule`;
     const schedules = yield http.get(apiUrl);
 

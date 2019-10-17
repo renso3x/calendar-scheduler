@@ -1,16 +1,27 @@
-import React, { useState } from "react";
-import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { getCurrentUser, register } from "../services/auth";
-import { Redirect } from "react-router-dom";
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-import "./Login.css";
+import useStyles from './styles/auth';
+
+import { getCurrentUser, register } from '../services/auth';
 
 const Register = ({ location }) => {
+  const classes = useStyles();
+
   const [state, setState] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
     isSubmitting: false
   });
 
@@ -29,70 +40,96 @@ const Register = ({ location }) => {
       const response = await register(state);
       if (response.status === 200) {
         const { state } = location;
-        window.location = state ? state.from.pathname : "/login";
+        window.location = state ? state.from.pathname : '/login';
       }
     } catch (e) {
       console.log(e);
     }
   };
 
-  const _goToSignIn = () => (window.location.href = "/login");
-
   if (getCurrentUser()) return <Redirect to="/" />;
 
   return (
-    <Container>
-      <div className="form-login">
-        <Form>
-          <FormGroup>
-            <Label for="firstName">First Name</Label>
-            <Input
-              type="text"
-              name="firstName"
-              placeholder="First Name"
-              onChange={handleChangeText}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="lastName">Last Name</Label>
-            <Input
-              type="text"
-              name="lastName"
-              placeholder="Last Name"
-              onChange={handleChangeText}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleChangeText}
-            />
-          </FormGroup>
-
-          <FormGroup>
-            <Label for="password">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              onChange={handleChangeText}
-            />
-          </FormGroup>
-        </Form>
-        <Button
-          className="btn btn-primary btn-lg btn-block"
-          onClick={handleSubmit}
-        >
-          Sign Up
-        </Button>
-        <Button
-          className="btn btn-secondary btn-lg btn-block"
-          onClick={_goToSignIn}
-        >
-          Login
-        </Button>
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Register
+        </Typography>
+        <form className={classes.form} noValidate>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+                onChange={handleChangeText}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+                onChange={handleChangeText}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                onChange={handleChangeText}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={handleChangeText}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={handleSubmit}
+          >
+            Sign Up
+          </Button>
+          <Grid container justify="flex-end">
+            <Grid item>
+              <Link href="/login" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
       </div>
     </Container>
   );

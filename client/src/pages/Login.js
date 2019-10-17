@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,10 +10,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
-import useStyles from './styles/login';
+import useStyles from './styles/auth';
 import { authenticate, setToken, getCurrentUser } from '../services/auth';
-
-import './Login.css';
 
 const Login = ({ location }) => {
   const classes = useStyles();
@@ -60,7 +57,6 @@ const Login = ({ location }) => {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
