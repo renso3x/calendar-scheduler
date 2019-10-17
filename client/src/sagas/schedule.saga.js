@@ -19,7 +19,7 @@ export function* watchfetchSchedules() {
 }
 
 function putSchedule(record) {
-  return http.put(`/schedule/${record.id}`, record);
+  return http.put(`/api/schedule/${record.id}`, record);
 }
 
 function* updateSchedule(action) {
@@ -35,7 +35,7 @@ function* updateSchedule(action) {
 }
 
 function addSchedule(data) {
-  return http.post(`/schedule/`, data);
+  return http.post(`/api/schedule/`, data);
 }
 
 function* createSchedule(action) {
@@ -55,7 +55,7 @@ function* fetchSchedules() {
     if (!getCurrentUser()) {
       return null;
     }
-    const apiUrl = `/schedule`;
+    const apiUrl = `/api/schedule`;
     const schedules = yield http.get(apiUrl);
 
     yield put({ type: FETCH_SCHEDULE, payload: schedules.data });
@@ -65,7 +65,7 @@ function* fetchSchedules() {
 }
 
 function deleteSchedule(record) {
-  return http.delete(`/schedule/${record.id}`);
+  return http.delete(`/api/schedule/${record.id}`);
 }
 
 function* removeSchedule(action) {

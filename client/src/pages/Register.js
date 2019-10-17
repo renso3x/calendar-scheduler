@@ -40,7 +40,7 @@ const Register = ({ location }) => {
       const response = await register(state);
       if (response.status === 200) {
         const { state } = location;
-        window.location = state ? state.from.pathname : '/login';
+        return <Redirect to="/login" />;
       }
     } catch (e) {
       console.log(e);

@@ -21,13 +21,13 @@ export const removeToken = () => {
 };
 
 export const authenticate = payload => {
-  const apiUrl = `/auth/login`;
+  const apiUrl = `/api/auth/login`;
 
   return httpRequest.post(apiUrl, payload);
 };
 
 export const register = payload => {
-  const apiUrl = `/user/register`;
+  const apiUrl = `/api/user/register`;
 
   return httpRequest.post(apiUrl, payload);
 };
