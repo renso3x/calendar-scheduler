@@ -16,7 +16,7 @@
   "author": "Romeo Enso",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bcrypt": "^3.0.6",
     "bluebird": "^3.7.1",
     "concurrently": "^4.0.1",
